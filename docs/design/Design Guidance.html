@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=900"/>
+<title>Design Guidance — Rick & Linda Care App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,wght@0,500;0,600;1,500&display=swap">
+<link rel="stylesheet" href="styles.css"/>
+<style>
+  body {
+    background:
+      radial-gradient(1200px 600px at 20% -200px, oklch(0.96 0.03 195 / 0.5), transparent),
+      radial-gradient(1000px 500px at 100% 20%, oklch(0.97 0.025 50 / 0.45), transparent),
+      var(--canvas);
+    min-height: 100vh;
+    padding: 48px 24px 96px;
+  }
+  .doc {
+    max-width: 860px; margin: 0 auto;
+    font-size: 15px; line-height: 1.6; color: var(--ink);
+  }
+  .doc h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500; font-size: 44px; line-height: 1.1;
+    letter-spacing: -0.02em; margin: 0 0 10px;
+  }
+  .doc .subtitle {
+    font-size: 17px; color: var(--ink-2); margin-bottom: 6px;
+  }
+  .doc .meta {
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 28px;
+  }
+  .doc h2 {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-size: 28px; line-height: 1.2; margin: 48px 0 8px;
+    border-top: 1px solid var(--hairline); padding-top: 40px;
+  }
+  .doc h2 .num {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    color: var(--accent-ink); background: var(--accent-wash);
+    padding: 3px 8px; border-radius: 6px; margin-right: 10px;
+    vertical-align: middle; font-weight: 500;
+  }
+  .doc h3 {
+    font-family: 'Inter', sans-serif; font-weight: 600;
+    font-size: 16px; margin: 28px 0 8px; color: var(--ink);
+  }
+  .doc h3::before {
+    content: '— '; color: var(--accent);
+  }
+  .doc p { margin: 0 0 12px; }
+  .doc ul { margin: 6px 0 16px; padding-left: 22px; }
+  .doc li { margin-bottom: 6px; }
+  .doc code {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    background: var(--surface-3); padding: 1px 6px; border-radius: 4px;
+    color: var(--ink-2);
+  }
+  .doc strong { color: var(--ink); font-weight: 600; }
+  .doc em { color: var(--accent-ink); font-style: italic; }
+  .doc .lede {
+    font-size: 17px; line-height: 1.6; color: var(--ink-2);
+    margin: 0 0 24px; padding: 14px 18px;
+    border-left: 3px solid var(--accent); background: var(--accent-wash);
+    border-radius: 0 12px 12px 0;
+  }
+  .doc .grid-2 {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 16px 0 24px;
+  }
+  .doc .card-inline {
+    padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px;
+    background: var(--surface);
+  }
+  .doc .card-inline .label {
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 600; margin-bottom: 6px;
+  }
+  .doc .card-inline .body { font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+  .doc .rule {
+    display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--hairline);
+  }
+  .doc .rule:last-child { border-bottom: 0; }
+  .doc .rule .k {
+    flex: 0 0 180px; font-weight: 600; color: var(--ink);
+  }
+  .doc .rule .v { flex: 1; color: var(--ink-2); }
+  .doc .tone-swatch {
+    display: inline-block; width: 12px; height: 12px; border-radius: 3px;
+    vertical-align: middle; margin-right: 6px;
+    border: 1px solid var(--border);
+  }
+  .doc .reuse {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 18px; margin: 14px 0 24px;
+  }
+  .doc .reuse .label {
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent-ink); font-weight: 700; margin-bottom: 6px;
+  }
+  .doc .anti {
+    background: oklch(0.98 0.015 25 / 0.4); border: 1px solid oklch(0.88 0.04 25);
+    border-radius: 12px; padding: 14px 18px; margin: 10px 0 20px;
+  }
+  .doc .anti .label {
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: oklch(0.42 0.15 25); font-weight: 700; margin-bottom: 6px;
+  }
+  .doc .toc {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 18px 22px; margin: 0 0 40px;
+  }
+  .doc .toc-item {
+    display: flex; gap: 10px; padding: 6px 0; color: var(--ink-2);
+    font-size: 14px;
+  }
+  .doc .toc-item .num {
+    font-family: 'JetBrains Mono', monospace; color: var(--accent-ink);
+    flex: 0 0 32px;
+  }
+  .doc .toc-item a { color: inherit; text-decoration: none; }
+  .doc .toc-item a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="meta">Design guidance · internal</div>
+  <h1>Rick &amp; Linda Care App</h1>
+  <div class="subtitle">How to extend Module 01's look &amp; feel into the rest of the product.</div>
+  <div class="meta" style="margin-top:4px">v1 · Apr 2026 · based on the shipped Module 01 prototype</div>
+
+  <div class="lede">
+    This document translates the design decisions we made in Module 01 (patient profile + clinical context)
+    into concrete rules so the next modules feel like the same app. Read Part 1 for the system; Parts 2–7 for per-module guidance.
+  </div>
+
+  <div class="toc">
+    <div class="toc-item"><span class="num">0</span><a href="#tenets">Tenets — what this app is and isn't</a></div>
+    <div class="toc-item"><span class="num">1</span><a href="#system">The visual system (reuse, don't reinvent)</a></div>
+    <div class="toc-item"><span class="num">2</span><a href="#m02">Module 02 — Onboarding &amp; household setup</a></div>
+    <div class="toc-item"><span class="num">3</span><a href="#m03">Module 03 — Alerts, notifications &amp; the "something's wrong" state</a></div>
+    <div class="toc-item"><span class="num">4</span><a href="#m04">Module 04 — Amy's verify &amp; edit loop (record stewardship)</a></div>
+    <div class="toc-item"><span class="num">5</span><a href="#m05">Module 05 — Rick's patient view (done right)</a></div>
+    <div class="toc-item"><span class="num">6</span><a href="#m06">Module 06 — Handoff family (ER, surgeon, aide, rehab)</a></div>
+    <div class="toc-item"><span class="num">7</span><a href="#m07">Module 07 — Activity feed, permissions &amp; the family graph</a></div>
+  </div>
+
+  <h2 id="tenets">Tenets</h2>
+  <p>Every design decision in this product should pass through these four filters:</p>
+
+  <h3>1. Family tool, not medical record</h3>
+  <p>
+    We write "Rick" and "Linda," not "Patient" and "Caregiver." We show recovery progress, not medical-record numbers.
+    MRN, height, weight, code status belong in the ER handoff PDF — not the home screen. If a field feels like it
+    came from an EHR intake form, it probably shouldn't be in the UI.
+  </p>
+
+  <h3>2. Calm when calm, assertive when not</h3>
+  <p>
+    Default surfaces are warm and low-contrast. Red, bold, and filled are earned states reserved for things that
+    actually matter right now: a life-threatening allergy, a missed anticoagulant dose, an active MPA. Overusing
+    urgency destroys our ability to signal it when it counts.
+  </p>
+
+  <h3>3. Every stakeholder sees a different app</h3>
+  <p>
+    The nav, the write affordances, and the primary surface change by role. Linda administers, Amy stewards the
+    record, Rick does his own check-ins, Ben is the technical operator, aides are scoped. Don't hide things from
+    people — give them a UI that fits their job.
+  </p>
+
+  <h3>4. Writes are first-class citizens</h3>
+  <p>
+    Every action (Mark taken, Log vitals, Check-in, Log fall, Add diagnosis, Verify allergy) flows through the
+    shared <code>useCareLog</code> store, is attributed to a stakeholder, and surfaces somewhere meaningful. "What
+    did I tap?" should always be answerable by scrolling the activity feed.
+  </p>
+
+  <h2 id="system">The visual system</h2>
+  <p>
+    Everything below already exists in the codebase. The job for subsequent modules is <em>to reuse these, not to invent new ones</em>.
+  </p>
+
+  <h3>Category tints (the spine of the visual language)</h3>
+  <p>
+    Each domain has a pastel background + darker ink + matching edge colour. Define via CSS variables
+    (<code>--cat-{name}-bg</code>, <code>--cat-{name}-ink</code>, <code>--cat-{name}-edge</code>). Use the
+    <code>.cat-surface.cat-{name}</code> class on any card that represents that domain.
+  </p>
+  <div class="rule"><div class="k"><span class="tone-swatch" style="background:var(--cat-allergy-bg)"></span>allergy</div>  <div class="v">Allergies, fall history, life-threatening, incidents</div></div>
+  <div class="rule"><div class="k"><span class="tone-swatch" style="background:var(--cat-surgery-bg)"></span>surgery</div>  <div class="v">Surgical history, hardware, implants, documents</div></div>
+  <div class="rule"><div class="k"><span class="tone-swatch" style="background:var(--cat-mpa-bg)"></span>mpa</div>          <div class="v">Medical POA, advance directive, legal authority</div></div>
+  <div class="rule"><div class="k"><span class="tone-swatch" style="background:var(--cat-meds-bg)"></span>meds</div>        <div class="v">Medications, pharmacy, supply, dose logs</div></div>
+  <div class="rule"><div class="k"><span class="tone-swatch" style="background:var(--cat-people-bg)"></span>people</div>    <div class="v">Family, providers, aides, contacts</div></div>
+  <div class="rule"><div class="k"><span class="tone-swatch" style="background:var(--cat-vitals-bg)"></span>vitals</div>    <div class="v">Readings, sparklines, orthostatic checks</div></div>
+  <div class="rule"><div class="k"><span class="tone-swatch" style="background:var(--cat-recovery-bg)"></span>recovery</div><div class="v">PT, check-ins, recovery progress, BLT</div></div>
+
+  <h3>Semantic states (earned colours)</h3>
+  <p>
+    These are <em>not</em> category tints — they are meaning. Don't use them for decoration.
+  </p>
+  <ul>
+    <li><code>critical</code> — red. Life-threatening allergy, missed anticoagulant, active incident, overdue >2h.</li>
+    <li><code>warning</code> — amber. Trending wrong, due soon, low supply, unverified important fact.</li>
+    <li><code>ok</code> — green. Taken, verified, stable, no concerns.</li>
+    <li><code>info</code> — blue. Neutral status, scheduled, on-track.</li>
+  </ul>
+
+  <h3>Type</h3>
+  <ul>
+    <li><code>t-display</code> / <code>t-h1</code> / <code>t-h2</code> / <code>t-h3</code> — never add new sizes; pick the closest.</li>
+    <li><code>t-body</code> / <code>t-body-sm</code> — narrative text.</li>
+    <li><code>t-label</code> — the small-caps kicker above every header.</li>
+    <li><code>t-meta</code> / <code>muted-2</code> — supporting/secondary info.</li>
+    <li><code>.mono</code> — only for values that look wrong in a proportional font (BP, times, phone numbers, MRN).</li>
+  </ul>
+
+  <h3>Components we already have (use these first)</h3>
+  <ul>
+    <li><code>ScreenHeader</code> — every inner screen; kicker + title + back + optional trailing action.</li>
+    <li><code>HeroCard</code> — identity + recovery ring. Surfaces Rick's "who he is right now."</li>
+    <li><code>CategoryCard</code> — pastel tile that links to a domain. Has primary/secondary lines, badge, chips.</li>
+    <li><code>VitalsTile</code> — value + unit + sparkline + trend note. Anywhere we show a number over time.</li>
+    <li><code>MedCard</code> — pill glyph + dose + supply bar + state chip. Never rebuild for a one-off.</li>
+    <li><code>AllergyRow</code> — warmer list row, auto-elevates on life-threatening.</li>
+    <li><code>Sheet</code> — the bottom-sheet modal scaffold. All logging forms inherit from this.</li>
+    <li><code>TimelineItem</code> — the "Now" anchor and vertical today-plan row.</li>
+    <li><code>RecoveryRing</code> — progress ring around any avatar or count.</li>
+    <li><code>SectionLabel</code> — the spaced uppercase row that divides every screen into blocks.</li>
+  </ul>
+
+  <div class="anti">
+    <div class="label">Anti-patterns to avoid</div>
+    <ul style="margin:6px 0 0">
+      <li>Dense 3-column clinical strips (MRN / height / weight / code). We removed these on purpose.</li>
+      <li>Gradient backgrounds as decoration. We only use them for earned urgency (ER banner) and the hero card.</li>
+      <li>Stock emoji in UI. If you need a symbol, use the Lucide-style icon set or a coloured dot.</li>
+      <li>Bright brand accents on every card. We commit to pastel surfaces; accent colour is rare and intentional.</li>
+      <li>"Open details" buttons. The whole card is clickable; the chevron signals it.</li>
+    </ul>
+  </div>
+
+  <h2 id="m02"><span class="num">M02</span>Onboarding &amp; household setup</h2>
+  <p>
+    <strong>The hardest module.</strong> How does a family get from zero to a populated record? This is where we
+    either earn a year of use or lose them in twenty minutes. Don't treat it as forms.
+  </p>
+
+  <h3>Frame the story, not the fields</h3>
+  <p>
+    Frame each step around why it matters — "So the ER knows what he can't take" (allergies), not "Add allergies."
+    The first screen after install shouldn't ask Linda to type; it should ask "who is the person you're caring for?"
+    and give her scannable options.
+  </p>
+
+  <h3>Three on-ramps, not one</h3>
+  <ul>
+    <li><strong>Fast path (90 sec):</strong> name, age, photo, top allergy, top 3 meds, one emergency contact. Good enough for the fridge magnet.</li>
+    <li><strong>After a hospital visit:</strong> upload discharge summary PDF → OCR or AI extract → review/accept.</li>
+    <li><strong>Invited by another family member:</strong> Amy or Ben already set it up; Linda just accepts an invite and gets a populated record.</li>
+  </ul>
+
+  <h3>Invitations &amp; role selection</h3>
+  <p>
+    A single "Invite someone" sheet with role picker (Primary caregiver · MPA holder · Family · Paid aide · Patient).
+    Show what each role will see and be able to do, in plain language, from Rick's perspective.
+    <em>"Amy will be able to: read everything, add and verify records, receive ER alerts. Amy will not be able to: log Rick's daily vitals or medications."</em>
+  </p>
+
+  <h3>Reuse</h3>
+  <div class="reuse">
+    <div class="label">Components to reuse</div>
+    <ul style="margin:6px 0 0">
+      <li><code>CategoryCard</code> tiles as role pickers — each role tinted by the domain they own.</li>
+      <li><code>Sheet</code> bottom-sheets for "Add allergy," "Add contact," "Invite family."</li>
+      <li><code>HeroCard</code> in its "pre-recovery" variant: no ring, just name + photo + "recovering from X."</li>
+      <li>The ER handoff PDF preview as the final onboarding screen — "here's the version of Rick you just built."</li>
+    </ul>
+  </div>
+
+  <h2 id="m03"><span class="num">M03</span>Alerts, notifications &amp; "something's wrong"</h2>
+  <p>
+    Module 01 is a calm app. Module 03 designs the <em>un</em>calm state. Get this wrong and we become a notification app that nobody trusts.
+  </p>
+
+  <h3>Alert taxonomy — three tiers, not a spectrum</h3>
+  <ul>
+    <li><strong>Tier 1 — critical:</strong> missed anticoagulant dose &gt;2 hours, life-threatening symptom flagged in check-in, fall with injury, vitals past a doctor-set threshold. Push notification with sound, red banner at top of app, ER button pulses.</li>
+    <li><strong>Tier 2 — attention:</strong> overdue dose 30–120 min, vitals trending wrong over 3 days, unverified allergy, new document awaiting review, MPA expiration in 30 days. In-app amber chip, quiet push, shows up as a "Needs attention" count on Today.</li>
+    <li><strong>Tier 3 — informational:</strong> "Amy added a note," "Dose logged by Aide." In-app only, shows in activity feed, never interrupts.</li>
+  </ul>
+
+  <h3>The assertive state, visually</h3>
+  <p>
+    When we need to get Linda's attention, the app doesn't just add a badge. Tier 1 does three things at once:
+    (1) a <code>critical-wash</code> banner takes over the top of Today with the specific concern + a one-tap resolution,
+    (2) the BottomNav's ER button pulses, (3) push notification with Rick's photo and one line
+    — never the medical term; say "Rick's Apixaban is 2 hours overdue," not "Anticoagulant non-compliance."
+  </p>
+
+  <h3>Dismiss, snooze, resolve — different verbs</h3>
+  <p>
+    Alerts never just go away. Linda resolves them (with a log entry), snoozes them (with a reason and duration), or escalates them to Amy. "X" never appears on a critical alert — that's a trap.
+  </p>
+
+  <div class="anti">
+    <div class="label">Hard rules</div>
+    <ul style="margin:6px 0 0">
+      <li>Tier 1 never appears for something we can't name precisely. Never "Rick needs attention" — say what.</li>
+      <li>No more than one Tier 1 alert visible at once. Queue them; show next when current is resolved.</li>
+      <li>Tier 3 never becomes Tier 2 from accumulation. "5 unread updates" is not an emergency.</li>
+      <li>Aide and Rick see fewer Tier 2 alerts than Linda/Amy. Scope by role — don't spam the scoped user.</li>
+    </ul>
+  </div>
+
+  <h3>Reuse</h3>
+  <div class="reuse">
+    <div class="label">Components to reuse</div>
+    <ul style="margin:6px 0 0">
+      <li>The <code>critical-wash</code> ER button on Today is already the pattern — scale it up for Tier 1 banners.</li>
+      <li>Chips (<code>chip.critical</code> / <code>.warning</code>) are the in-line alert language.</li>
+      <li>Activity feed entries double as Tier 3 delivery — no new surface needed.</li>
+      <li>Bottom-sheet <code>Sheet</code> for the resolution/snooze/escalate picker.</li>
+    </ul>
+  </div>
+
+  <h2 id="m04"><span class="num">M04</span>Amy's verify &amp; edit loop</h2>
+  <p>
+    Amy is the record's <em>steward</em>. She adds, edits, and verifies. This module is what separates our app from a generic patient portal.
+  </p>
+
+  <h3>"Needs attention" as her Today surface</h3>
+  <p>
+    Amy's Today should lead with a queue: "2 unverified allergies," "New document uploaded by Linda — review?",
+    "Dr. Kim's phone number hasn't been checked in 8 months." The queue is prioritized, dismissable, and generates
+    a badge on the Records tab when populated.
+  </p>
+
+  <h3>Verify is a three-state toggle</h3>
+  <p>
+    Every factual record has one of:
+  </p>
+  <ul>
+    <li><strong>Unverified</strong> — added by a family member, not yet confirmed by a clinician. Shows amber chip.</li>
+    <li><strong>Verified</strong> — Amy (or a provider) confirmed directly, with attribution and date.</li>
+    <li><strong>Disputed</strong> — conflicting entry (e.g. Rick says allergic to shellfish, ER records don't list it). Needs resolution.</li>
+  </ul>
+  <p>
+    Disputed is the state we haven't designed. It's a neutral-grey chip that opens a sheet listing the two sources
+    side-by-side with "Accept A," "Accept B," "Keep both."
+  </p>
+
+  <h3>Inline edit, with attribution</h3>
+  <p>
+    Amy taps a value (phone number, reaction type, provider org). The value becomes an input in place. Saving logs
+    "Amy updated X from Y to Z" to the activity feed. No modal, no form screen — the record is the form.
+  </p>
+
+  <h3>The upload pipeline (docs → structured data)</h3>
+  <p>
+    Amy uploads a PDF. The app shows: document preview, extracted candidate fields (diagnoses, meds, dates), and a
+    review row per candidate — "Add to Rick's record?" Reject/Edit/Accept per row. Never auto-accept; never force her
+    to fill the form manually.
+  </p>
+
+  <div class="reuse">
+    <div class="label">Components to reuse</div>
+    <ul style="margin:6px 0 0">
+      <li><code>AllergyDetailSheet</code> already has the verify/edit pattern — generalize to "RecordDetailSheet."</li>
+      <li><code>ActivityFeed</code> is where every edit surfaces. No new "audit log" UI needed.</li>
+      <li><code>CategoryCard</code> with a badge ("2 unverified") drives the Records landing.</li>
+    </ul>
+  </div>
+
+  <h2 id="m05"><span class="num">M05</span>Rick's patient view</h2>
+  <p>
+    Currently Rick sees a trimmed version of Linda's app. That's the MVP. The real patient view is a different product.
+  </p>
+
+  <h3>What Rick's Today should actually be</h3>
+  <p>
+    Strip it down to: a warm greeting, <em>one</em> primary action (the next thing he should do — take a pill,
+    do a check-in, rest), and his recovery progress. No vital tiles. No timeline. No activity feed. The more he
+    sees, the less likely he uses it.
+  </p>
+
+  <h3>Readable from across the room</h3>
+  <p>
+    Text baseline should be 16px at minimum, and the primary action button should never be smaller than 56px tall
+    for Rick. Contrast ratios should pass WCAG AAA, not AA. Sparklines are excluded from his view — they need
+    scrutiny he won't give.
+  </p>
+
+  <h3>One-handed, home-row thumb zone</h3>
+  <p>
+    Every tappable element Rick cares about sits in the bottom half of the screen. The bottom nav we have is right;
+    the quick-action row we added for caregivers stays in the thumb zone.
+  </p>
+
+  <h3>Plain language, everywhere</h3>
+  <ul>
+    <li>"Blood thinner" not "Apixaban"</li>
+    <li>"For pain" not "Oxycodone"</li>
+    <li>"Surgery healing" not "Post-op status"</li>
+    <li>"How you felt yesterday" not "Check-in history"</li>
+  </ul>
+
+  <div class="anti">
+    <div class="label">Hard rules</div>
+    <ul style="margin:6px 0 0">
+      <li>Rick never sees MPA status as a warning — he's the holder when it's inactive. Frame as "You decide."</li>
+      <li>Rick never sees his own fall history on Today. It's for the caregivers.</li>
+      <li>Rick's write affordances only: mark-taken, 30-sec check-in. Everything else is view-only.</li>
+    </ul>
+  </div>
+
+  <h2 id="m06"><span class="num">M06</span>Handoff family</h2>
+  <p>
+    The ER PDF is one of several handoffs. Each has a different audience, density, and tone.
+  </p>
+
+  <div class="grid-2">
+    <div class="card-inline">
+      <div class="label">ER handoff</div>
+      <div class="body">Dense, clinical, single-page. For a 15-second read by a stranger. Already built.</div>
+    </div>
+    <div class="card-inline">
+      <div class="label">Surgeon follow-up</div>
+      <div class="body">Meds + symptoms + PT adherence + questions Linda wrote down. 1–2 pages. Generated for a scheduled visit.</div>
+    </div>
+    <div class="card-inline">
+      <div class="label">Aide shift brief</div>
+      <div class="body">Today's schedule + what to watch for + "don't do these things." One page, friendly, photo-led.</div>
+    </div>
+    <div class="card-inline">
+      <div class="label">Rehab admission</div>
+      <div class="body">Full history export — allergies, hardware, current meds, recent vitals, providers. 3–4 pages, clinical.</div>
+    </div>
+  </div>
+
+  <h3>Design rules across all handoffs</h3>
+  <ul>
+    <li><strong>Review before generate.</strong> The user always sees what will be included and can toggle sensitive sections (insurance, MPA, mental health) before the PDF exists.</li>
+    <li><strong>One font, one weight, one accent.</strong> Handoffs aren't the place for our pastel palette. Black-on-white with one critical red for the "cannot take this" rows.</li>
+    <li><strong>Attribution footer.</strong> "Prepared by Linda · generated Apr 19, 2026 · sources: Brigham discharge 3/18, family-reported." Lets the reader trust or discount.</li>
+    <li><strong>QR code in the footer.</strong> Points to a time-limited web view of the same data so a provider can update us without typing.</li>
+  </ul>
+
+  <h3>Reuse</h3>
+  <div class="reuse">
+    <div class="label">Components to reuse</div>
+    <ul style="margin:6px 0 0">
+      <li><code>ERPDFPreview</code> is the scaffold — parametrize the sections by handoff type.</li>
+      <li>Section chooser UI from ER handoff (the "Included by default" + "Optional" pattern) generalizes.</li>
+      <li><code>CategoryCard</code> on a "Handoffs" landing screen — one tile per handoff type, each linked to its generator.</li>
+    </ul>
+  </div>
+
+  <h2 id="m07"><span class="num">M07</span>Activity feed, permissions &amp; the family graph</h2>
+  <p>
+    We have <code>useCareLog</code> and a Today feed. The full module is the family-graph layer on top: who sees what, who can do what, and how the history of changes is visible to everyone.
+  </p>
+
+  <h3>The activity feed as the app's nervous system</h3>
+  <p>
+    Every write — every log, every edit, every verification, every upload — flows through <code>useCareLog</code>
+    with a kind, timestamp, actor, and detail. The full feed is a filterable timeline (by kind, by person, by date
+    range) and is where Amy audits Linda's care and vice versa.
+  </p>
+
+  <h3>Permissions, not roles</h3>
+  <p>
+    Role presets (Primary / MPA / Family / Aide / Patient) are starting points. The real model is per-capability:
+    can this person <em>read</em> / <em>write</em> / <em>verify</em> / <em>share</em> each of the eight domains?
+    Build the matrix once; present it as simple presets 95% of the time and as the full grid only when Linda wants
+    to customize an aide's scope.
+  </p>
+
+  <h3>Invitation &amp; exit flows</h3>
+  <ul>
+    <li><strong>Adding a person:</strong> email/phone → role preset → welcome screen tailored to what they'll see.</li>
+    <li><strong>Removing a person:</strong> their history is preserved, their future access is revoked, they get a polite notice. Never silently.</li>
+    <li><strong>Transferring primary:</strong> if Linda can no longer be primary (hospitalized herself), Amy can accept primary with a signed acknowledgement.</li>
+  </ul>
+
+  <h3>The MPA activation audit trail</h3>
+  <p>
+    Already in Module 01. The full module extends it to: who was present when it was activated, what specific
+    decisions were made under activation (DNR consent, surgical consent, discharge disposition), and the
+    deactivation record. This is the most legally sensitive part of the app — it deserves its own clean, formal
+    surface distinct from the warm everyday UI.
+  </p>
+
+  <div class="reuse">
+    <div class="label">Components to reuse</div>
+    <ul style="margin:6px 0 0">
+      <li><code>ActivityFeed</code> row component scales to a full-screen filterable timeline.</li>
+      <li><code>MPAScreen</code>'s activation history is the template for the decision audit trail.</li>
+      <li>Per-role nav config (<code>NAV_CONFIGS</code>) is the canonical pattern for role-based UI divergence.</li>
+    </ul>
+  </div>
+
+  <h2>Closing note</h2>
+  <p>
+    The goal of every module that follows is not to add new surfaces. It's to deepen the few we have. The Today
+    screen, the Records tab, the activity feed, the handoff PDF — these are the four things a real family will
+    interact with 90% of the time. If a module can't be expressed as changes to those four surfaces, ask hard
+    whether it belongs.
+  </p>
+
+  <p class="meta" style="margin-top:40px; border-top:1px solid var(--hairline); padding-top:24px;">
+    Design lead · April 2026
+  </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,245 @@
+/* ─────────────────────────────────────────────────────────────
+   Rick & Linda Care App — design tokens (v2: warm caregiver)
+   Inspired by CareMate + LikarBox + Wellness-Aging case studies.
+   Warm off-white canvas, pastel category tints, generous type.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* Type */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* Core neutrals — warm, not cool gray */
+  --canvas:      oklch(0.985 0.006 75);     /* warm off-white */
+  --surface:     oklch(1.00 0 0);           /* pure white cards */
+  --surface-2:   oklch(0.975 0.006 75);
+  --surface-3:   oklch(0.955 0.008 75);
+  --hairline:    oklch(0.92 0.008 75);
+  --border:      oklch(0.89 0.010 75);
+  --border-strong: oklch(0.80 0.012 75);
+
+  --ink:         oklch(0.22 0.015 260);
+  --ink-2:       oklch(0.36 0.015 260);
+  --ink-3:       oklch(0.52 0.012 260);
+  --ink-4:       oklch(0.68 0.010 260);
+  --ink-5:       oklch(0.80 0.008 260);
+
+  /* Accent (primary brand — calm teal) */
+  --accent:      oklch(0.52 0.09 195);
+  --accent-ink:  oklch(0.38 0.08 195);
+  --accent-wash: oklch(0.96 0.025 195);
+  --accent-edge: oklch(0.86 0.05 195);
+
+  /* Severity — reserved for real danger */
+  --critical:    oklch(0.58 0.18 25);
+  --critical-ink:oklch(0.42 0.17 25);
+  --critical-wash:oklch(0.96 0.035 25);
+  --critical-edge:oklch(0.86 0.07 25);
+
+  --warning:     oklch(0.68 0.13 70);
+  --warning-ink: oklch(0.48 0.12 70);
+  --warning-wash:oklch(0.97 0.03 80);
+  --warning-edge:oklch(0.88 0.06 80);
+
+  --ok:          oklch(0.62 0.11 155);
+  --ok-ink:      oklch(0.42 0.10 155);
+  --ok-wash:     oklch(0.96 0.03 155);
+  --ok-edge:     oklch(0.86 0.06 155);
+
+  --info:        oklch(0.55 0.10 245);
+  --info-ink:    oklch(0.40 0.10 245);
+  --info-wash:   oklch(0.96 0.025 245);
+  --info-edge:   oklch(0.88 0.05 245);
+
+  /* Pastel CATEGORY tints — one per clinical domain */
+  --cat-meds-bg:      oklch(0.965 0.04 165);  /* mint */
+  --cat-meds-ink:     oklch(0.38 0.08 165);
+  --cat-meds-edge:    oklch(0.86 0.06 165);
+
+  --cat-vitals-bg:    oklch(0.965 0.035 230); /* sky */
+  --cat-vitals-ink:   oklch(0.38 0.08 230);
+  --cat-vitals-edge:  oklch(0.86 0.05 230);
+
+  --cat-surgery-bg:   oklch(0.965 0.035 75);  /* sand */
+  --cat-surgery-ink:  oklch(0.40 0.07 75);
+  --cat-surgery-edge: oklch(0.86 0.05 75);
+
+  --cat-allergy-bg:   oklch(0.965 0.035 20);  /* rose */
+  --cat-allergy-ink:  oklch(0.42 0.10 20);
+  --cat-allergy-edge: oklch(0.86 0.06 20);
+
+  --cat-mpa-bg:       oklch(0.965 0.035 295); /* lavender */
+  --cat-mpa-ink:      oklch(0.40 0.08 295);
+  --cat-mpa-edge:     oklch(0.86 0.05 295);
+
+  --cat-people-bg:    oklch(0.965 0.03 50);   /* peach */
+  --cat-people-ink:   oklch(0.42 0.08 50);
+  --cat-people-edge:  oklch(0.88 0.05 50);
+
+  --cat-recovery-bg:  oklch(0.965 0.03 140);  /* sage */
+  --cat-recovery-ink: oklch(0.38 0.07 140);
+  --cat-recovery-edge:oklch(0.86 0.05 140);
+
+  /* Radii & shadow */
+  --r-xs: 6px; --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px; --r-pill: 999px;
+  --shadow-0: 0 1px 2px oklch(0.2 0.01 260 / 0.05);
+  --shadow-1: 0 2px 8px oklch(0.2 0.01 260 / 0.06), 0 1px 2px oklch(0.2 0.01 260 / 0.04);
+  --shadow-2: 0 8px 24px oklch(0.2 0.01 260 / 0.10), 0 2px 6px oklch(0.2 0.01 260 / 0.05);
+  --shadow-raised: 0 14px 30px oklch(0.45 0.08 195 / 0.28), 0 4px 10px oklch(0.45 0.08 195 / 0.18);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button { font-family: inherit; }
+input, textarea, select { font-family: inherit; }
+
+/* Type scale — bigger, softer */
+.t-display { font-family: var(--font-display); font-size: 34px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+.t-h1      { font-size: 24px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
+.t-h2      { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
+.t-h3      { font-size: 15px; font-weight: 600; letter-spacing: -0.005em; line-height: 1.3; }
+.t-body    { font-size: 15px; font-weight: 400; line-height: 1.5; }
+.t-body-sm { font-size: 13.5px; font-weight: 400; line-height: 1.45; }
+.t-meta    { font-size: 12px; font-weight: 500; color: var(--ink-3); line-height: 1.4; }
+.t-label   { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.mono      { font-family: var(--font-mono); font-feature-settings: 'tnum' 1, 'ss01' 1; }
+.muted     { color: var(--ink-4); }
+.muted-2   { color: var(--ink-3); }
+
+/* Surfaces */
+.card {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+  border: 1px solid oklch(0.92 0.008 75 / 0.7);
+}
+.card-flat {
+  background: var(--surface);
+  border-radius: var(--r-md);
+  border: 1px solid var(--hairline);
+}
+.card-sunken {
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  border: 1px dashed var(--border);
+}
+
+/* Layout helpers */
+.stack-2  > * + * { margin-top: 2px; }
+.stack-4  > * + * { margin-top: 4px; }
+.stack-6  > * + * { margin-top: 6px; }
+.stack-8  > * + * { margin-top: 8px; }
+.stack-10 > * + * { margin-top: 10px; }
+.stack-12 > * + * { margin-top: 12px; }
+.stack-16 > * + * { margin-top: 16px; }
+.stack-20 > * + * { margin-top: 20px; }
+.stack-24 > * + * { margin-top: 24px; }
+.row-flex { display: flex; align-items: center; }
+.row-flex-between { display: flex; align-items: center; justify-content: space-between; }
+.hr { height: 1px; background: var(--hairline); margin: 4px 0; border: 0; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 14px; border-radius: var(--r-pill);
+  font-size: 14px; font-weight: 600;
+  border: 1px solid transparent; cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
+  min-height: 44px; white-space: nowrap;
+}
+.btn:active { transform: scale(0.98); }
+.btn.primary { background: var(--accent); color: white; box-shadow: var(--shadow-1); }
+.btn.primary:hover { background: oklch(0.46 0.09 195); }
+.btn.secondary { background: var(--surface); color: var(--ink); border-color: var(--border); }
+.btn.secondary:hover { background: var(--surface-2); }
+.btn.ghost { background: transparent; color: var(--ink-2); }
+.btn.ghost:hover { background: var(--surface-3); }
+.btn.danger { background: var(--critical); color: white; }
+.btn.sm { padding: 6px 12px; font-size: 12.5px; min-height: 34px; border-radius: var(--r-pill); }
+
+.icon    { width: 18px; height: 18px; flex-shrink: 0; }
+.icon-sm { width: 14px; height: 14px; flex-shrink: 0; }
+.icon-lg { width: 24px; height: 24px; flex-shrink: 0; }
+
+/* Chips */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 9px; border-radius: var(--r-pill);
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.01em;
+  border: 1px solid transparent; white-space: nowrap;
+}
+.chip.neutral  { background: var(--surface-3); color: var(--ink-2); border-color: var(--border); }
+.chip.accent   { background: var(--accent-wash); color: var(--accent-ink); border-color: var(--accent-edge); }
+.chip.critical { background: var(--critical-wash); color: var(--critical-ink); border-color: var(--critical-edge); }
+.chip.warning  { background: var(--warning-wash); color: var(--warning-ink); border-color: var(--warning-edge); }
+.chip.ok       { background: var(--ok-wash); color: var(--ok-ink); border-color: var(--ok-edge); }
+.chip.info     { background: var(--info-wash); color: var(--info-ink); border-color: var(--info-edge); }
+
+/* Scroll */
+.scroll-y { overflow-y: auto; scrollbar-width: thin; }
+.scroll-y::-webkit-scrollbar { width: 6px; }
+.scroll-y::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+
+/* Section header inside a card/screen */
+.section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* Pastel category surface */
+.cat-surface {
+  border-radius: var(--r-lg);
+  padding: 16px;
+  border: 1px solid transparent;
+}
+.cat-meds    { background: var(--cat-meds-bg);     border-color: var(--cat-meds-edge); }
+.cat-vitals  { background: var(--cat-vitals-bg);   border-color: var(--cat-vitals-edge); }
+.cat-surgery { background: var(--cat-surgery-bg);  border-color: var(--cat-surgery-edge); }
+.cat-allergy { background: var(--cat-allergy-bg);  border-color: var(--cat-allergy-edge); }
+.cat-mpa     { background: var(--cat-mpa-bg);      border-color: var(--cat-mpa-edge); }
+.cat-people  { background: var(--cat-people-bg);   border-color: var(--cat-people-edge); }
+.cat-recovery{ background: var(--cat-recovery-bg); border-color: var(--cat-recovery-edge); }
+
+/* Timeline */
+.timeline {
+  position: relative; padding-left: 40px;
+}
+.timeline::before {
+  content: ''; position: absolute; left: 18px; top: 8px; bottom: 8px;
+  width: 2px; background: var(--hairline); border-radius: 999px;
+}
+.timeline-item { position: relative; padding-bottom: 14px; }
+.timeline-dot {
+  position: absolute; left: -30px; top: 14px;
+  width: 18px; height: 18px; border-radius: 999px;
+  background: var(--surface); border: 2px solid var(--border-strong);
+  display: flex; align-items: center; justify-content: center;
+}
+.timeline-dot.ok       { border-color: var(--ok); background: var(--ok); }
+.timeline-dot.pending  { border-color: var(--border-strong); background: var(--surface); }
+.timeline-dot.warn     { border-color: var(--warning); background: var(--warning); }
+.timeline-dot.critical { border-color: var(--critical); background: var(--critical); }
+.timeline-now {
+  position: absolute; left: -34px; width: 26px; height: 26px; top: 10px;
+  border-radius: 999px; background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-wash);
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+}
+
+/* Sparkline */
+.sparkline { display: block; width: 100%; height: 28px; }
+
+/* Recovery ring (SVG target size) */
+.ring-wrap { position: relative; display: inline-flex; }
+.ring-inner {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+}
