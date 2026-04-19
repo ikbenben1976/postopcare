@@ -1,0 +1,52 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-critical: var(--critical);
+  --color-warning: var(--warning);
+  --color-ok: var(--ok);
+  --color-neutral: var(--neutral);
+  --color-info: var(--info);
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --critical: oklch(0.577 0.245 27.325);
+  --warning: oklch(0.828 0.189 84.429);
+  --ok: oklch(0.646 0.222 141.116);
+  --neutral: oklch(0.556 0 0);
+  --info: oklch(0.646 0.222 252.116);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --critical: oklch(0.706 0.191 22.216);
+  --warning: oklch(0.828 0.189 84.429);
+  --ok: oklch(0.696 0.17 162.48);
+  --neutral: oklch(0.708 0 0);
+  --info: oklch(0.67 0.175 251.116);
+}
+
+* {
+  border-color: var(--neutral);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
