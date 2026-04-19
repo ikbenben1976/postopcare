@@ -1,4 +1,4 @@
-# Module 01 — Patient Profile & Clinical Context (Deep Spec v1.2)
+# Module 01 — Patient Profile & Clinical Context (Deep Spec v1.2.1)
 
 **Status:** Phase A. Build-ready.
 
@@ -11,6 +11,7 @@
 **Change log:**
 - **v1.0 → v1.1:** Added Section 14 (Multi-Agent Build Instructions) and Section 15 (Integration Contracts).
 - **v1.1 → v1.2:** Incorporated Claude Design output and Design Guidance document. ASCII wireframes (v1.1 §4.2–4.6) deleted; canonical visual design now lives in the Claude Design project and the companion Design System Contract doc. §4 restructured to reference Claude Design handoff and split screens into high-fidelity (Phase A priority) vs wireframe-fidelity tiers. §5.1 onboarding replaced with three on-ramps pattern (Fast path / After hospital / Invited) from Design Guidance §M02. §4.5 MPA framing shifted to "You decide" for Rick's view per Design Guidance §M05. Integration contracts (§15) extended with `useCareLog` write-store contract. Tech stack references updated to React 19 + Tailwind v4 + pinned versions per technical_foundation.md v1.1.
+- **v1.2 → v1.2.1:** Point release. Added §3 design note requiring the multi-user-per-role pattern in Phase 1 migrations. Surfaced by a conversation about adding Ben's brother Eli as a second family-role member; the change is orthogonal to Eli specifically and codifies the correct generic role-system shape for forward modules (including a planned care coordination / task-assignment module).
 
 ---
 
@@ -77,6 +78,8 @@ The "crash card." A single canonical source of truth for who the patient is, wha
 ## 3. Data Model Additions
 
 Builds on the tables defined in the technical foundation (`patients`, `surgeries`, `diagnoses`, `providers`, `patient_providers`, `pharmacies`, `documents`). Tables below are new to Module 01 or require field additions.
+
+**Design note on multi-user roles (Phase 1 migrations must honor this):** The `family` role supports multiple members per household — Ben (technical operator sub-capability) and Eli (family support, no sub-capability) are two examples. Phase 1 migrations for role assignments must use a many-to-many pattern (e.g., a `household_users` join table with `role` and optional `sub_capabilities` columns) rather than a single-`user_id`-per-role column. This is the correct generic shape regardless of how many family members exist today, and it's what future modules (including care coordination / task assignment) will build on.
 
 ### 3.1 New tables
 
@@ -1336,3 +1339,4 @@ If any contract in §15 needs to change, the IA:
 5. All dependent modules update in the same PR or in a coordinated stack
 
 No silent contract changes. Ever.
+
